@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html { @apply bg-stone-50; }
-  body { @apply min-h-screen bg-stone-50 text-ink antialiased; }
+  body { @apply min-h-screen bg-stone-50 font-sans text-ink antialiased; }
   ::selection { @apply bg-emerald-200 text-emerald-950; }
   input, textarea, select { @apply rounded-xl border-slate-200 bg-white px-3.5 py-2.5 text-sm text-ink shadow-sm transition placeholder:text-slate-400 focus:border-mint focus:outline-none focus:ring-4 focus:ring-emerald-100; }
   textarea { @apply min-h-24 resize-y; }
