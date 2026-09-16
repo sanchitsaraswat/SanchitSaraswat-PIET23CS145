@@ -43,6 +43,7 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - Authentication rate limiting now applies only to registration and login, so repeated stale-session refresh attempts cannot block login.
 - Reproduced and fixed the login failure: 25 refresh requests returned `401`, followed by successful registration and login; the full test suite passed.
 - Auth controller failures now reach Express's JSON error handler instead of terminating the API; invalid credentials return `401` and valid login continues to return `200`.
+- Dashboard now explicitly names unlogged habits in a dismissible reminder and sorts incomplete habits above completed ones.
 
 ## Important known limitation
 
