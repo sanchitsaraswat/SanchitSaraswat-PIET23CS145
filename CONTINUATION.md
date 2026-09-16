@@ -38,6 +38,8 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - Weekday streak behavior is covered by the passing streak tests, including weekends not breaking a weekday streak.
 - Frontend-origin registration and login smoke test passed through `http://localhost:5173/api`.
 - `npm test` and `npm run build` passed again after the login fix.
+- New-habit form now includes eight editable activity templates for movement, reading, hydration, meditation, learning, tidying, planning, and journaling.
+- Frontend tests and production build passed after adding the activity templates.
 
 ## Important known limitation
 
