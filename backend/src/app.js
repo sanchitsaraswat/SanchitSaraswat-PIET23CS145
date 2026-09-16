@@ -14,7 +14,7 @@ import { today } from './controllers/dashboardController.js';
 import { prisma } from './db/prisma.js';
 import { AppError } from './errors/AppError.js';
 export const app = express();
-app.disable('x-powered-by'); app.use(requestContext); app.use(helmet()); app.use(cors({ origin: env.frontendUrl, credentials: true })); app.use(express.json({ limit: '32kb' })); app.use(cookieParser());
+app.disable('x-powered-by'); app.set('trust proxy', 1); app.use(requestContext); app.use(helmet()); app.use(cors({ origin: env.frontendUrl, credentials: true })); app.use(express.json({ limit: '32kb' })); app.use(cookieParser());
 app.use(morgan(':method :url :status :response-time ms request=:req[x-request-id]', { skip: (req) => req.url === '/health' }));
 app.get('/health', async (_req, res, next) => { try { await prisma.$queryRaw`SELECT 1`; res.json({ status: 'ok', database: 'ok' }); } catch (error) { next(error); } });
 app.use('/api/auth', rateLimit({ windowMs: 15 * 60 * 1000, limit: 20, standardHeaders: true, legacyHeaders: false }), authRoutes);

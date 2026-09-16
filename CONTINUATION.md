@@ -17,6 +17,8 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - Prisma schema block syntax corrected for Prisma 6.
 - Prisma workspace scripts and backend runtime now load the documented root `.env`.
 - Habit patch validation now derives from the unrefined Zod object, allowing the API to start.
+- Frontend API requests use same-origin paths with a Vite development proxy, fixing forwarded-browser login.
+- Express trusts the local proxy hop and handles missing refresh sessions without crashing the API.
 
 ## Before calling this complete
 
@@ -34,6 +36,8 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - `npm run dev` served Vite at `http://localhost:5173/` and the API on port 4000.
 - Live API smoke test passed registration, login, habit creation, weekday completion/undo, edit, search, archive, and restore.
 - Weekday streak behavior is covered by the passing streak tests, including weekends not breaking a weekday streak.
+- Frontend-origin registration and login smoke test passed through `http://localhost:5173/api`.
+- `npm test` and `npm run build` passed again after the login fix.
 
 ## Important known limitation
 

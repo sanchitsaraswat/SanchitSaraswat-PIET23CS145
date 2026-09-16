@@ -6,7 +6,7 @@ const sendSession = (res, session, status = 200) => { res.cookie('refreshToken',
 export const authController = {
   async register(req, res) { sendSession(res, await authService.register(registerSchema.parse(req.body)), 201); },
   async login(req, res) { sendSession(res, await authService.login(loginSchema.parse(req.body))); },
-  async refresh(req, res) { sendSession(res, await authService.refresh(req.cookies.refreshToken)); },
+  async refresh(req, res, next) { try { sendSession(res, await authService.refresh(req.cookies.refreshToken)); } catch (error) { next(error); } },
   async logout(req, res) { await authService.logout(req.cookies.refreshToken); res.clearCookie('refreshToken', cookie).status(204).send(); },
   async me(req, res) { res.json({ data: await authService.me(req.auth.sub) }); }
 };

@@ -1,4 +1,4 @@
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const baseUrl = import.meta.env.VITE_API_URL || '';
 let accessToken = null;
 export const authStore = { get: () => accessToken, set: (token) => { accessToken = token; } };
 async function request(path, options = {}, retry = true) {
