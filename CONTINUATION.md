@@ -14,16 +14,26 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - React auth, dashboard, habits creation/search, archive/restore screens.
 - Codespaces dev-container configuration, protected completion-history endpoint, and a habit edit/detail screen.
 - Docker/Compose, environment template, README, reasoning, and AI-log placeholder.
+- Prisma schema block syntax corrected for Prisma 6.
+- Prisma workspace scripts and backend runtime now load the documented root `.env`.
+- Habit patch validation now derives from the unrefined Zod object, allowing the API to start.
 
 ## Before calling this complete
 
-1. Run `npm install` from repository root (network access needed), then `npm run prisma:generate --workspace backend`. On 2026-09-16, a verification install was attempted but npm failed with `ECONNRESET` while downloading from `registry.npmjs.org`; no test or production build has therefore been executed.
-2. Copy `.env.example` to `.env`; replace JWT example values with distinct secrets.
-3. Run `docker compose up -d postgres`, then `npm run prisma:deploy --workspace backend`.
-4. Run `npm test`, `npm run build`, and `npm run dev`; exercise registration/login, create, complete/undo, archive/restore, search, and persistence.
-5. Fix any install/build issues caused by package-version drift.
-6. Add API integration tests with a disposable PostgreSQL database. The UI habit edit/detail page is now implemented; validate it manually after dependencies install.
-7. Paste the actual raw AI conversation into `AI_LOGS.md` only at submission time.
+1. Replace the example JWT values in `.env` with distinct secrets before a real deployment.
+2. Add API integration tests with a disposable PostgreSQL database. The UI habit edit/detail page is implemented but was not browser-tested in this run.
+3. Paste the actual raw AI conversation into `AI_LOGS.md` only at submission time; it remains unchanged.
+
+## Verification on 2026-09-16
+
+- `npm install` completed successfully.
+- `npm run prisma:generate --workspace backend` passed.
+- `npm run prisma:deploy --workspace backend` passed with no pending migrations.
+- `npm test` passed: 4 backend tests and 1 frontend test.
+- `npm run build` passed; Vite emitted only the existing large-chunk warning.
+- `npm run dev` served Vite at `http://localhost:5173/` and the API on port 4000.
+- Live API smoke test passed registration, login, habit creation, weekday completion/undo, edit, search, archive, and restore.
+- Weekday streak behavior is covered by the passing streak tests, including weekends not breaking a weekday streak.
 
 ## Important known limitation
 

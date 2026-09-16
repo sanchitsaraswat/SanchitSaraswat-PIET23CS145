@@ -1,4 +1,6 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '../.env' });
 const required = ['DATABASE_URL', 'JWT_ACCESS_SECRET', 'JWT_REFRESH_SECRET'];
 for (const key of required) if (!process.env[key] && process.env.NODE_ENV !== 'test') throw new Error(`Missing environment variable: ${key}`);
 export const env = {

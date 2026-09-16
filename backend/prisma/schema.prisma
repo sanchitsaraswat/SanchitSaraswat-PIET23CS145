@@ -1,7 +1,17 @@
-generator client { provider = "prisma-client-js" }
-datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+generator client {
+  provider = "prisma-client-js"
+}
 
-enum ScheduleType { DAILY CUSTOM }
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ScheduleType {
+  DAILY
+  CUSTOM
+}
+
 model User {
   id String @id @default(cuid())
   email String @unique
