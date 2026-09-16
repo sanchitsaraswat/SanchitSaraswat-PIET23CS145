@@ -1,9 +1,11 @@
 import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
 import { authController } from '../controllers/authController.js';
 import { requireAuth } from '../middleware/auth.js';
 export const authRoutes = Router();
-authRoutes.post('/register', authController.register);
-authRoutes.post('/login', authController.login);
+const credentialRateLimit = rateLimit({ windowMs: 15 * 60 * 1000, limit: 20, standardHeaders: true, legacyHeaders: false });
+authRoutes.post('/register', credentialRateLimit, authController.register);
+authRoutes.post('/login', credentialRateLimit, authController.login);
 authRoutes.post('/refresh', authController.refresh);
 authRoutes.post('/logout', authController.logout);
 authRoutes.get('/me', requireAuth, authController.me);

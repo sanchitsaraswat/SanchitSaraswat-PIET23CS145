@@ -40,6 +40,8 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 - `npm test` and `npm run build` passed again after the login fix.
 - New-habit form now includes eight editable activity templates for movement, reading, hydration, meditation, learning, tidying, planning, and journaling.
 - Frontend tests and production build passed after adding the activity templates.
+- Authentication rate limiting now applies only to registration and login, so repeated stale-session refresh attempts cannot block login.
+- Reproduced and fixed the login failure: 25 refresh requests returned `401`, followed by successful registration and login; the full test suite passed.
 
 ## Important known limitation
 
