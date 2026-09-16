@@ -24,7 +24,7 @@ Complete and validate the Habitly Codespaces submission from the supplied produc
 
 1. Replace the example JWT values in `.env` with distinct secrets before a real deployment.
 2. Add API integration tests with a disposable PostgreSQL database. The UI habit edit/detail page is implemented but was not browser-tested in this run.
-3. Paste the actual raw AI conversation into `AI_LOGS.md` only at submission time; it remains unchanged.
+3. Keep `AI_LOGS.md` as the assessment conversation artifact; the supplied assessment conversation and this project conversation are now appended there.
 
 ## Verification on 2026-09-16
 
