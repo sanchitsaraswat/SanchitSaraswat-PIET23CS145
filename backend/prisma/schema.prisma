@@ -1,0 +1,56 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+enum ScheduleType { DAILY CUSTOM }
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  timezone String @default("UTC")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  habits Habit[]
+  refreshTokens RefreshToken[]
+}
+model Habit {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name String
+  description String?
+  scheduleType ScheduleType @default(DAILY)
+  archivedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  schedule HabitSchedule[]
+  completions HabitCompletion[]
+  @@index([userId, archivedAt])
+  @@index([userId, name])
+}
+model HabitSchedule {
+  id String @id @default(cuid())
+  habitId String
+  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  weekday Int
+  @@unique([habitId, weekday])
+  @@index([habitId])
+}
+model HabitCompletion {
+  id String @id @default(cuid())
+  habitId String
+  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  completionDate DateTime @db.Date
+  createdAt DateTime @default(now())
+  @@unique([habitId, completionDate])
+  @@index([habitId, completionDate])
+}
+model RefreshToken {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  @@index([userId, expiresAt])
+}

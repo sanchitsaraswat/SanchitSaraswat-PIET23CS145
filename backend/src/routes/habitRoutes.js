@@ -1,0 +1,14 @@
+import { Router } from 'express';
+import { habitController } from '../controllers/habitController.js';
+import { requireAuth } from '../middleware/auth.js';
+export const habitRoutes = Router();
+habitRoutes.use(requireAuth);
+habitRoutes.get('/', habitController.list);
+habitRoutes.post('/', habitController.create);
+habitRoutes.get('/:id', habitController.get);
+habitRoutes.patch('/:id', habitController.update);
+habitRoutes.post('/:id/archive', habitController.archive);
+habitRoutes.post('/:id/restore', habitController.restore);
+habitRoutes.get('/:id/completions', habitController.completions);
+habitRoutes.post('/:id/completions', habitController.complete);
+habitRoutes.delete('/:id/completions/:date', habitController.undo);
